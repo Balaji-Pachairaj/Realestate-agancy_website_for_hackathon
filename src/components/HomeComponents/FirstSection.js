@@ -1,9 +1,12 @@
 import React from "react";
 import homebg from "../../Assets/home_bg.jpg";
+import { useNavigate } from "react-router-dom";
+import routes from "../../Config/route";
 
 const src = "";
 
 const FirstSection = () => {
+  const navigate = useNavigate();
   return (
     <div className=" w-full h-[92vh]  relative">
       <img className=" w-full h-full object-cover" src={homebg} />
@@ -16,10 +19,20 @@ const FirstSection = () => {
         </h1>
 
         <div className=" w-fit flex md:flex-row md:justify-center items-center flex-col gap-[1rem] mt-[2rem]">
-          <button className=" w-[165px] h-[40px] rounded-[5px] bg-[#AB886D] text-[white] font-bold font-poppins text-[14px] hover:text-[16px] duration-300">
+          <button
+            onClick={() => {
+              navigate(routes?.properties);
+            }}
+            className=" w-[165px] h-[40px] rounded-[5px] bg-[#AB886D] text-[white] font-bold font-poppins text-[14px] hover:text-[16px] duration-300"
+          >
             VIEW PROPERTIES
           </button>
-          <button className=" w-[190px] h-[40px] rounded-[5px] border-2  border-[#F3C623] text-[#F3C623] font-poppins font-bold text-[14px]  duration-300 hover:text-[16px]">
+          <button
+            onClick={() => {
+              navigate(routes?.contactus);
+            }}
+            className=" w-[190px] h-[40px] rounded-[5px] border-2  border-[#F3C623] text-[#F3C623] font-poppins font-bold text-[14px]  duration-300 hover:text-[16px]"
+          >
             CONTACT US
           </button>
         </div>

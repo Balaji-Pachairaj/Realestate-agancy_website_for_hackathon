@@ -7,11 +7,23 @@ import SignUpPage from "./pages/Home/SignUpPage";
 import SigninPage from "./pages/Home/SigninPage";
 import PropertyPage from "./pages/PropertyPage/PropertyPage";
 import PropertyIndivPage from "./pages/PropertyPage/PropertyIndivPage";
+import ContactUsForm from "./components/HomeComponents/ContactUsForm";
+import WantToSell from "./components/HomeComponents/WantToSell";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+
+  {
+    path: routes?.contactus,
+    element: <ContactUsForm />,
+  },
+
+  {
+    path: routes?.wantToSell,
+    element: <WantToSell />,
   },
 
   {

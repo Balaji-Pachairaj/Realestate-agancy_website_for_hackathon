@@ -156,7 +156,9 @@ const PropertyComponentLayout = () => {
 
           {/* Search Button */}
           <button
-            onClick={handleSearch}
+            onClick={() => {
+              handleSearch(location);
+            }}
             className="bg-orange-500 text-white rounded-lg px-6 py-2 mt-6 hover:bg-orange-600"
           >
             Search
