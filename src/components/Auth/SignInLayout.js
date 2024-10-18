@@ -1,25 +1,29 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { api_base, api_headers } from "../../API/APIconfig";
+import { PostAPI } from "../../API/PostAPI";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import routes from "../../Config/route";
+import { masterSliceAction } from "../../slices/masterSlice";
 
 const SignInLayout = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
-    axios.post("http://localhost:2012/api/auth/login", {
-      email,
-      password,
-    });
+
+    dispatch(login_thunk({ email, password }, navigate));
   };
 
   return (
     <div className="w-full h-full flex justify-center items-center  bg-gray-100">
-      <div className=" w-[750px] h-[450px] flex flex-row justify-end  rounded-[20px] overflow-hidden shadow-2xl ">
-        <div className=" flex-1 w-full h-full  overflow-hidden ">
+      <div className=" max-w-[750px] w-[90%] h-[450px] flex flex-row justify-end  rounded-[20px] overflow-hidden shadow-2xl ">
+        <div className=" flex-1 w-full h-full  hidden md:block overflow-hidden ">
           <img
             src={
               "https://images.unsplash.com/photo-1605001062746-4548791acc99?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -27,7 +31,7 @@ const SignInLayout = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="bg-white shadow-lg rounded-lg p-8 w-96">
+        <div className="bg-white shadow-lg rounded-lg p-8 md:w-96 w-full">
           {/* Title */}
           <h2 className="text-2xl font-semibold text-center text-blue-600 mb-6">
             SIGN IN
@@ -41,6 +45,10 @@ const SignInLayout = () => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="E-mail"
             />
@@ -57,6 +65,10 @@ const SignInLayout = () => {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Password"
             />
@@ -90,9 +102,13 @@ const SignInLayout = () => {
           {/* Create Account */}
           <p className="text-center text-gray-700 text-sm mt-6">
             New member?{" "}
-            <a href="#" className="text-blue-500 hover:underline">
+            <NavLink
+              to={routes?.signup}
+              href="#"
+              className="text-blue-500 hover:underline"
+            >
               Create account
-            </a>
+            </NavLink>
           </p>
         </div>
       </div>
@@ -101,3 +117,28 @@ const SignInLayout = () => {
 };
 
 export default SignInLayout;
+
+let login_thunk = (obj, navigate) => {
+  return async (dispatch) => {
+    let url = new URL(api_base + "/auth/login");
+
+    let headers = { ...api_headers };
+
+    let body = obj;
+
+    let response = await PostAPI(url, body, headers);
+
+    if (response?.ok) {
+      let responsedata = await response?.json();
+      console.log(responsedata);
+      dispatch(
+        masterSliceAction?.updateAuth({
+          isAuth: true,
+          username: responsedata?.user?.username,
+          email: responsedata?.user?.email,
+        })
+      );
+      navigate(routes?.properties);
+    }
+  };
+};

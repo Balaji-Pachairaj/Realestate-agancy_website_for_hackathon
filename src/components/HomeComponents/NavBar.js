@@ -6,6 +6,9 @@ import { FaFacebook } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { Link, NavLink } from "react-router-dom";
 import routes from "../../Config/route";
+import { useSelector } from "react-redux";
+
+import { CgProfile } from "react-icons/cg";
 
 const SocialMedia = ({ socialMedia = "", link = "/" }) => {
   return (
@@ -161,6 +164,10 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const { auth } = useSelector((state) => {
+    return state.master;
+  });
+
   return (
     <>
       <nav className="bg-gray-600 shadow  hidden md:block">
@@ -195,19 +202,32 @@ const Navbar = () => {
             >
               Want to sell ?
             </NavLink>
-            <NavLink
-              to={routes?.signin}
-              href="#"
-              className="text-white hover:text-yellow-500"
-            >
-              Log in
-            </NavLink>
-            <NavLink
-              to={routes?.signup}
-              className="text-white hover:text-yellow-500"
-            >
-              Sign Up
-            </NavLink>
+
+            {!auth?.isAuth && (
+              <>
+                <NavLink
+                  to={routes?.signin}
+                  href="#"
+                  className="text-white hover:text-yellow-500"
+                >
+                  Log in
+                </NavLink>
+                <NavLink
+                  to={routes?.signup}
+                  className="text-white hover:text-yellow-500"
+                >
+                  Sign Up
+                </NavLink>
+              </>
+            )}
+
+            {auth?.isAuth && (
+              <>
+                <div className=" font-poppins text-[16px] items-center flex flex-row gap-[0.5rem] text-[yellow]">
+                  <CgProfile size={24} /> {auth?.username}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -252,19 +272,31 @@ const Navbar = () => {
               >
                 Want to sell ?
               </NavLink>
-              <NavLink
-                to={routes?.signin}
-                href="#"
-                className="text-white hover:text-yellow-500 w-full truncate h-[40px] border-b-2 border-white flex flex-row items-center ps-[2rem] font-poppins text-[18px]"
-              >
-                Log in
-              </NavLink>
-              <NavLink
-                to={routes?.signup}
-                className="text-white hover:text-yellow-500 w-full truncate h-[40px] border-b-2 border-white flex flex-row items-center ps-[2rem] font-poppins text-[18px]"
-              >
-                Sign Up
-              </NavLink>
+              {!auth?.isAuth && (
+                <>
+                  <NavLink
+                    to={routes?.signin}
+                    href="#"
+                    className="text-white hover:text-yellow-500 w-full truncate h-[40px] border-b-2 border-white flex flex-row items-center ps-[2rem] font-poppins text-[18px]"
+                  >
+                    Log in
+                  </NavLink>
+                  <NavLink
+                    to={routes?.signup}
+                    className="text-white hover:text-yellow-500 w-full truncate h-[40px] border-b-2 border-white flex flex-row items-center ps-[2rem] font-poppins text-[18px]"
+                  >
+                    Sign Up
+                  </NavLink>
+                </>
+              )}
+
+              {auth?.isAuth && (
+                <>
+                  <div className=" ps-8 border-b-2  h-[50px] font-poppins text-[16px] items-center flex flex-row gap-[0.5rem] text-[yellow]">
+                    <CgProfile size={24} /> {auth?.username}
+                  </div>
+                </>
+              )}
             </ul>
           </div>
         )}

@@ -3,6 +3,7 @@ import PropertyCard from "../../templates/PropertyCard";
 import { useNavigate } from "react-router-dom";
 import routes from "../../Config/route";
 import axios from "axios";
+import { api_base } from "../../API/APIconfig";
 
 const ListingSection = () => {
   const [resproperties, setResProperties] = useState([]);
@@ -10,7 +11,7 @@ const ListingSection = () => {
   // Function to fetch properties from the API
   const ListingProperties = async () => {
     try {
-      const response = await axios.get("http://localhost:2012/api/Properties");
+      const response = await axios.get(api_base + "/Properties");
       return response.data.properties; // Assuming the response has a "properties" field
     } catch (error) {
       console.error("Error fetching properties:", error);

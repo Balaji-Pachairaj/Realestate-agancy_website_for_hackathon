@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { LuBedSingle } from "react-icons/lu";
 import { FaBath } from "react-icons/fa6";
 import axios from "axios";
+import { api_base } from "../../API/APIconfig";
 
 const PropertyIndivComponent = () => {
   let params = useParams();
@@ -16,9 +17,7 @@ const PropertyIndivComponent = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:2012/api/Property/${params.id}`
-        );
+        const response = await axios.get(api_base + `/Property/${params.id}`);
         setProperty(response.data.property); // Assuming 'property' contains the data
       } catch (error) {
         console.error("Error fetching property data:", error);
@@ -31,9 +30,7 @@ const PropertyIndivComponent = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:2012/api/Properties`
-        );
+        const response = await axios.get(api_base + `/Properties`);
         // Set the first three properties
         setListProperties(response.data.properties.slice(0, 3));
       } catch (error) {

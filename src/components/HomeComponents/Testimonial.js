@@ -5,30 +5,30 @@ import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 export const content_testimonal = [
   {
     image:
-      "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e8840553eff51ab7404b73_testimonial-img-03.webp",
-    name: "Sophia Chen",
-    testimonial: `"Thanks to their AI-driven insights, we’ve been able to make smarter decisions faster. Their dedication to our success was evident from day one."`,
+      "https://media.istockphoto.com/id/1213300831/photo/senior-woman-looking-at-camera.jpg?s=612x612&w=0&k=20&c=5PoBMM0PNjh3wffxbWGIO6-gjc0M8t6ukOPsekRBlzc=",
+    name: "Emma R.",
+    testimonial: `"We had the best experience buying our first home through this real estate agency. They guided us every step of the way, ensuring we found the perfect home within our budget. Highly recommend their professional services!"`,
     position: "Head of Operations, Innovatex",
   },
   {
     image:
-      "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e88407dc8dd84e8b5f5848_testimonial-img-04.webp",
-    name: "Emma Blake",
-    testimonial: `"Working with this AI team has been a game-changer for our business. Their innovative solutions streamlined our operations and improved efficiency beyond expectations."`,
+      "https://media.istockphoto.com/id/1321848051/photo/portrait-of-young-brunette-girl-in-denim-shirt.jpg?s=612x612&w=0&k=20&c=OFGeG8Tk2DoEHJoyxznreU7YrhavH5VcMsGfN7-KfjU=",
+    name: "Carlos Ramirez",
+    testimonial: `"Selling our house seemed daunting, but with this team, everything went smoothly. They provided expert advice, staged our home beautifully, and we sold it above asking price in just two weeks!"`,
     position: "CTO, Fintechpro",
   },
   {
     image:
-      "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e88405b213c2b042b9a7f3_testimonial-img-01.webp",
-    name: "Carlos Ramirez",
+      "https://cdn.pixabay.com/photo/2022/06/20/08/30/indian-7273305_1280.jpg",
+    name: "David and Sarah M.",
     testimonial: `"Their AI solutions transformed our customer experience, allowing us to provide personalized services at scale. I highly recommend their team for any AI project."`,
     position: "Product Manager, Healthify",
   },
   {
     image:
-      "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e8840579d3cd5c95a0eaec_testimonial-img-02.webp",
-    name: "David Morgan",
-    testimonial: `"The AI services provided were not only cutting-edge but also customized to fit our exact needs. Their expertise truly elevated our digital strategy."`,
+      "https://plus.unsplash.com/premium_photo-1682092603230-1ce7cf8ca451?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW5kaWFuJTIwbWFufGVufDB8fDB8fHww",
+    name: "Jonathan L.",
+    testimonial: `"As a real estate investor, I have worked with several agents, but none compare to the dedication and market knowledge this company brings. They helped me find lucrative properties and made the whole process effortless."`,
     position: "CEO, Beyond",
   },
 ];
@@ -282,7 +282,7 @@ const Testimonial = () => {
   return (
     <>
       <div className=" w-full h-[125vh] overflow-hidden sm:block hidden mt-[2rem]">
-        <h1  className="text-[12vw] hover:text-[13vw] duration-200 text-center font-black text-gray-500 uppercase tracking-[-0.05em] leading-[0.8] whitespace-nowrap scale-y-[1.2] mb-[2rem]">
+        <h1 className="text-[12vw] hover:text-[13vw] duration-200 text-center font-black text-gray-500 uppercase tracking-[-0.05em] leading-[0.8] whitespace-nowrap scale-y-[1.2] mb-[2rem]">
           Testimonals
         </h1>
         <div className="w-full h-screen relative overflow-hidden sm:block hidden">

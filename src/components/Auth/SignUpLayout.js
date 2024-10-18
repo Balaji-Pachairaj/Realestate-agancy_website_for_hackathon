@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { api_base, api_headers } from "../../API/APIconfig";
+import { useDispatch } from "react-redux";
+import { PostAPI } from "../../API/PostAPI";
+import { useNavigate } from "react-router-dom";
+import routes from "../../Config/route";
 
 const SignUpLayout = () => {
   const [email, setEmail] = useState("");
@@ -12,26 +16,21 @@ const SignUpLayout = () => {
   const toggleConfirmPasswordVisibility = () =>
     setShowConfirmPassword(!showConfirmPassword);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
     console.log("Email:", email);
     console.log("Password:", password);
-    if (showConfirmPassword === showPassword) {
-      await axios.post("http://localhost:2012/api/auth/register", {
-        username,
-        email,
-        password,
-      });
-    } else {
-      console.log("password should match");
-    }
+    dispatch(login_thunk({ email, username, password }, navigate));
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-start mt-[2rem]  bg-gray-100">
-      <div className=" w-[750px] h-[500px] flex flex-row justify-end  rounded-[20px] overflow-hidden shadow-2xl ">
-        <div className=" flex-1 w-full h-full  overflow-hidden ">
+    <div className="w-full h-full flex justify-center items-start pt-[2rem]  bg-gray-100">
+      <div className=" max-w-[750px] w-[90%] h-[500px] flex flex-row justify-end  rounded-[20px] overflow-hidden shadow-2xl ">
+        <div className=" flex-1 w-full h-full hidden md:block  overflow-hidden ">
           <img
             src={
               "https://images.unsplash.com/photo-1605001062746-4548791acc99?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -39,7 +38,7 @@ const SignUpLayout = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="bg-white shadow-md rounded-lg p-8 w-96">
+        <div className="bg-white shadow-md rounded-lg p-8 md:w-96 w-full">
           {/* Title */}
           <h2 className="text-2xl font-semibold text-center text-blue-600 mb-6">
             SIGN UP
@@ -135,3 +134,21 @@ const SignUpLayout = () => {
   );
 };
 export default SignUpLayout;
+
+let login_thunk = (obj, navigate) => {
+  return async (dispatch) => {
+    let url = new URL(api_base + "/auth/register");
+
+    let headers = { ...api_headers };
+
+    let body = obj;
+
+    let response = await PostAPI(url, body, headers);
+
+    if (response?.ok) {
+      let responsedata = await response?.json();
+      console.log(responsedata);
+      navigate(routes?.signin);
+    }
+  };
+};
